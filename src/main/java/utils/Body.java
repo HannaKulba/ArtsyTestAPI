@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
-public class Bodies {
+public class Body {
 
     public static String getRequestTokenBody() {
         JsonObject jsonObject = new JsonObject();

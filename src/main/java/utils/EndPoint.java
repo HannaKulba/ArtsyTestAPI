@@ -1,6 +1,6 @@
 package utils;
 
-public class EndPoints {
+public class EndPoint {
 
     public static final String BASEURI = "https://api.artsy.net/api";
     public static final String TOKEN = "/tokens/xapp_token";
