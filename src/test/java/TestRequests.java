@@ -20,8 +20,9 @@ public class TestRequests extends BeforeRequest {
     public void checkArtistId() {
         response = sendRequest(EndPoint.SEARCH + "Gustav+Klimt");
         GustavKlimtID = ParseMethods.getArtistIdFromSearch(response);
+        String expectedGustavKlimtID = "4d8b92b64eb68a1b2c000414";
 
-        Assertions.assertEquals("4d8b92b64eb68a1b2c000414", GustavKlimtID);
+        Assertions.assertEquals(expectedGustavKlimtID, GustavKlimtID, "Values are not equal. Current ID: " + GustavKlimtID + ", expected: " + expectedGustavKlimtID);
     }
 
     @Test
@@ -30,8 +31,9 @@ public class TestRequests extends BeforeRequest {
     public void checkArtistHomeTown() {
         response = sendRequest(EndPoint.ARTISTS + "/" + GustavKlimtID);
         String hometown = ParseMethods.getArtistHometown(response);
+        String expectedHometown = "Baumgarten, Austria";
 
-        Assertions.assertEquals("Baumgarten, Austria", hometown);
+        Assertions.assertEquals(expectedHometown, hometown, "Values are not equal. Current hometown: " + hometown + ", expected: " + expectedHometown);
     }
 
     @Test
@@ -39,8 +41,9 @@ public class TestRequests extends BeforeRequest {
     @DisplayName("Check if Gustav Klimt has artwork 'Der Kuss (The Kiss)'")
     public void checkArtistHasArtwork() {
         response = sendRequest(EndPoint.ARTWORKS + "/?artist_id=" + GustavKlimtID);
+        String expectedArtWorkName = "Der Kuss (The Kiss)";
 
-        Assertions.assertTrue(response.getBody().asString().contains("Der Kuss (The Kiss)"));
+        Assertions.assertTrue(response.getBody().asString().contains(expectedArtWorkName), "Response doesn't contain artwork named " + expectedArtWorkName);
     }
 
     @Test
@@ -57,7 +60,7 @@ public class TestRequests extends BeforeRequest {
         actualTimes.add(ParseMethods.getJsonObjectFromResponse(response).get("created_at").getAsString());
         actualTimes.add(ParseMethods.getJsonObjectFromResponse(response).get("updated_at").getAsString());
 
-        Assertions.assertArrayEquals(expectedTimes.toArray(), actualTimes.toArray());
+        Assertions.assertArrayEquals(expectedTimes.toArray(), actualTimes.toArray(), "Arrays are not equal");
     }
 
     @Test
@@ -66,8 +69,9 @@ public class TestRequests extends BeforeRequest {
     public void checkUserName() throws IOException {
         response = sendRequest(EndPoint.USERS + "/" + Property.getPropertyValue("user_id"));
         String username = ParseMethods.getJsonObjectFromResponse(response).get("name").getAsString();
+        String expetedUsername = "Hanna";
 
-        Assertions.assertEquals("Hanna", username);
+        Assertions.assertEquals(expetedUsername, username, "Username is not " + expetedUsername + ". Current username is " + username);
     }
 
 }
