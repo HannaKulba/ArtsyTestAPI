@@ -1,5 +1,6 @@
-package utils;
+package utilsAPI;
 
+import endpoints.EndPointArtsy;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
@@ -9,7 +10,7 @@ public class ArtsyAPISpecification {
 
     public static RequestSpecification getRequestSpecification() {
         return new RequestSpecBuilder()
-                .setBaseUri(EndPoint.BASEURI)
+                .setBaseUri(EndPointArtsy.BASEURI)
                 .setContentType(ContentType.JSON)
                 .log(LogDetail.METHOD)
                 .log(LogDetail.URI)

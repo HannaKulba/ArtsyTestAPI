@@ -1,6 +1,8 @@
+package testArtsy;
+
+import endpoints.EndPointArtsy;
 import org.junit.jupiter.api.*;
-import pages.ParseMethods;
-import utils.EndPoint;
+import utilsAPI.ParseMethods;
 import utils.Property;
 
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class TestRequests extends BeforeRequest {
     @Order(1)
     @DisplayName("Check Gustav Klimt ID")
     public void checkArtistId() {
-        response = sendRequest(EndPoint.SEARCH + "Gustav+Klimt");
+        response = sendRequest(EndPointArtsy.SEARCH + "Gustav+Klimt");
         GustavKlimtID = ParseMethods.getArtistIdFromSearch(response);
         String expectedGustavKlimtID = "4d8b92b64eb68a1b2c000414";
 
@@ -29,7 +31,7 @@ public class TestRequests extends BeforeRequest {
     @Order(2)
     @DisplayName("Check hometown of Gustav Klimt")
     public void checkArtistHomeTown() {
-        response = sendRequest(EndPoint.ARTISTS + "/" + GustavKlimtID);
+        response = sendRequest(EndPointArtsy.ARTISTS + "/" + GustavKlimtID);
         String hometown = ParseMethods.getArtistHometown(response);
         String expectedHometown = "Baumgarten, Austria";
 
@@ -40,7 +42,7 @@ public class TestRequests extends BeforeRequest {
     @Order(3)
     @DisplayName("Check if Gustav Klimt has artwork 'Der Kuss (The Kiss)'")
     public void checkArtistHasArtwork() {
-        response = sendRequest(EndPoint.ARTWORKS + "/?artist_id=" + GustavKlimtID);
+        response = sendRequest(EndPointArtsy.ARTWORKS + "/?artist_id=" + GustavKlimtID);
         String expectedArtWorkName = "Der Kuss (The Kiss)";
 
         Assertions.assertTrue(response.getBody().asString().contains(expectedArtWorkName), "Response doesn't contain artwork named " + expectedArtWorkName);
@@ -55,7 +57,7 @@ public class TestRequests extends BeforeRequest {
         ArrayList<String> expectedTimes = new ArrayList<>(Arrays.asList("2015-01-21T17:01:13+00:00", "2015-01-21T17:01:13+00:00"));
         ArrayList<String> actualTimes = new ArrayList<>();
 
-        response = sendRequest(EndPoint.IMAGES + "/" + imageID);
+        response = sendRequest(EndPointArtsy.IMAGES + "/" + imageID);
 
         actualTimes.add(ParseMethods.getJsonObjectFromResponse(response).get("created_at").getAsString());
         actualTimes.add(ParseMethods.getJsonObjectFromResponse(response).get("updated_at").getAsString());
@@ -67,7 +69,7 @@ public class TestRequests extends BeforeRequest {
     @Order(5)
     @DisplayName("Check name of user")
     public void checkUserName() throws IOException {
-        response = sendRequest(EndPoint.USERS + "/" + Property.getPropertyValue("user_id"));
+        response = sendRequest(EndPointArtsy.USERS + "/" + Property.getPropertyValue("user_id"));
         String username = ParseMethods.getJsonObjectFromResponse(response).get("name").getAsString();
         String expetedUsername = "Hanna";
 

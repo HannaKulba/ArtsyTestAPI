@@ -1,8 +1,8 @@
-package utils;
+package utilsAPI;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import utils.Log;
+import utils.Property;
 
 import java.io.IOException;
 
@@ -22,19 +22,4 @@ public class Body {
         return jsonObject.toString();
     }
 
-    public String createJsonUsingGson(Object object) {
-        Gson gson = new Gson();
-        String json = gson.toJson(object);
-        Log.info(json);
-        return json;
-    }
-
-    public void parseJsonUsingGson(String json) {
-        JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-
-        for (String key : jsonObject.keySet()){
-            Log.info("Key: " + key + ", value: " + jsonObject.get(key));
-        }
-
-    }
 }

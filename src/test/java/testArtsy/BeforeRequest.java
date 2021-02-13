@@ -1,10 +1,12 @@
+package testArtsy;
+
+import endpoints.EndPointArtsy;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
-import pages.ParseMethods;
-import utils.ArtsyAPISpecification;
-import utils.Body;
-import utils.EndPoint;
+import utilsAPI.ParseMethods;
+import utilsAPI.ArtsyAPISpecification;
+import utilsAPI.Body;
 import utils.Property;
 
 import java.io.IOException;
@@ -33,7 +35,7 @@ public class BeforeRequest {
         Response response = given().spec(requestSpec)
                 .when()
                 .body(Body.getRequestTokenBody())
-                .post(EndPoint.TOKEN);
+                .post(EndPointArtsy.TOKEN);
         String token = ParseMethods.getAXAPPToken(response);
         requestSpec.header("x-xapp-token", token);
     }

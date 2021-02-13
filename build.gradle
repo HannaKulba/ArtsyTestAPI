@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'test.api.artsy'
+group 'test.api'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -20,6 +20,7 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     implementation 'io.rest-assured:rest-assured:4.3.1'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
+    compile group: 'io.rest-assured', name: 'json-schema-validator', version: '3.3.0'
 }
 
 apply plugin: 'java'
