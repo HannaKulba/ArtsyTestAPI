@@ -19,4 +19,5 @@ public class PetShopApiSpecification {
                 .log(LogDetail.BODY)
                 .build();
     }
+    
 }
