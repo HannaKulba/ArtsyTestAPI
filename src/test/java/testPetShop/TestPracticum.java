@@ -40,6 +40,7 @@ public class TestPracticum {
         JsonParser parser = new JsonParser();
         Long id = parser.parse(responseBody).getAsJsonArray().get(0).getAsJsonObject().get("id").getAsLong();
 
+        
         System.out.println(id);
 
     }
